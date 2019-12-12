@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:BaseView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:base="clr-namespace:RehmaniQaidaApp.Views.Abstractions"
+             Title="About Us"
+             xmlns:viewModel="clr-namespace:RehmaniQaidaApp.ViewModels"
+             x:TypeArguments="viewModel:AboutViewModel"
+             Style="{StaticResource page}"
+             x:Class="RehmaniQaidaApp.Views.AboutView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Our About Page!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</base:BaseView>

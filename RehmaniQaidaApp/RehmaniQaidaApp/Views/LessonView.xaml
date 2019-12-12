@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            mc:Ignorable="d"
+            Style="{StaticResource page}"
+            xmlns:view="clr-namespace:RehmaniQaidaApp.Views"
+            BarBackgroundColor="#003366"
+            xmlns:effect="clr-namespace:RehmaniQaidaApp.Effects"
+            BarTextColor="White"
+            UnselectedTabColor="White"
+            SelectedTabColor="White"
+            xmlns:viewModel="clr-namespace:RehmaniQaidaApp.ViewModels"
+            Title="{Binding Title}"
+            x:Class="RehmaniQaidaApp.Views.LessonView">
+    <TabbedPage.Effects>
+        <effect:NoShiftEffect />
+    </TabbedPage.Effects>
+    <view:LessonDetailView Title="Lesson" IconImageSource="ic_book">
+        <view:LessonDetailView.ViewModel>
+            <viewModel:LessonDetailViewModel />
+        </view:LessonDetailView.ViewModel>
+    </view:LessonDetailView>
+
+    <view:LessonReadingView Title="Reading" IconImageSource="ic_reading">
+        <view:LessonReadingView.ViewModel>
+            <viewModel:LessonReadingViewModel />
+        </view:LessonReadingView.ViewModel>
+    </view:LessonReadingView>
+
+    <view:LessonQuizView Title="Quiz" IconImageSource="ic_quiz">
+        <view:LessonQuizView.ViewModel>
+            <viewModel:LessonQuizViewModel />
+        </view:LessonQuizView.ViewModel>
+    </view:LessonQuizView>
+    
+    <view:LessonColorChartView Title="Color Chart" IconImageSource="ic_color">
+        <view:LessonColorChartView.ViewModel>
+            <viewModel:LessonColorChartViewModel />
+        </view:LessonColorChartView.ViewModel>
+    </view:LessonColorChartView>
+</TabbedPage>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:BaseView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:view="clr-namespace:RehmaniQaidaApp.Views"
+             mc:Ignorable="d"
+             BackgroundColor="White"
+             xmlns:base="clr-namespace:RehmaniQaidaApp.Views.Abstractions"
+             xmlns:viewModel="clr-namespace:RehmaniQaidaApp.ViewModels"
+             x:TypeArguments="viewModel:MasterViewModel"
+             x:Class="RehmaniQaidaApp.Views.MasterView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image BackgroundColor="#003366" Aspect="AspectFit" Source="logo" HeightRequest="150" />
+            <TableView Intent="Menu" RowHeight="60">
+                <TableRoot>
+                    <TableSection>
+                        <view:MenuCell Text="Lessons" Icon="ic_lesson" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="Lesson" />
+                        <view:MenuCell Text="Quiz" Icon="ic_quiz" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="Quiz"  />
+                        <view:MenuCell Text="About" Icon="ic_about" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="About" />
+                    </TableSection>
+                    <TableSection>
+                        <view:MenuCell Text="Rate App" Icon="ic_rate" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="RateApp" />
+                        <view:MenuCell Text="Share App" Icon="ic_share" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="ShareApp" />
+                        <view:MenuCell Text="Update App" Icon="ic_update" TappedCommand="{Binding MenuCommand}" ShowBottomDivider="False" TappedCommandParameter="UpdateApp" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+        </StackLayout>
+    </ContentPage.Content>
+</base:BaseView>
