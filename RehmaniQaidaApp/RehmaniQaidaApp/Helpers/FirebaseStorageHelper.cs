@@ -11,7 +11,7 @@ namespace RehmaniQaidaApp.Helpers
 {
     public class FirebaseStorageHelper : IFirebaseStorageHelper
     {
-        readonly FirebaseStorage firebaseStorage = new FirebaseStorage("rehmaniqaidaapp.appspot.com");
+        readonly FirebaseStorage firebaseStorage = new FirebaseStorage("####Inset Firebase Storage Url Here####");
         public async Task<string> DownloadLessonPageAsync(string lesson, int itemNumber)
         {
             var file = lesson.ToLower().Replace(" ", string.Empty);

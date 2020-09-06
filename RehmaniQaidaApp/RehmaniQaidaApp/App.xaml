@@ -10,10 +10,23 @@
         <Style TargetType="ContentPage" x:Key="page" ApplyToDerivedTypes="True">
             <Setter Property="BackgroundColor" Value="White" />
             <Setter Property="material:MaterialNavigationPage.AppBarTitleTextAlignment" Value="Start" />
-            
             <Setter Property="Padding" Value="20" />
             <Setter Property="material:MaterialNavigationPage.AppBarColor" Value="#003366" />
             <Setter Property="material:MaterialNavigationPage.StatusBarColor" Value="#021D3A" />
+        </Style>
+
+        <Style TargetType="TabbedPage" x:Key="tabbedPage">
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="material:MaterialNavigationPage.AppBarTitleTextAlignment" Value="Start" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="material:MaterialNavigationPage.AppBarColor" Value="#003366" />
+            <Setter Property="material:MaterialNavigationPage.StatusBarColor" Value="#021D3A" />
+        </Style>
+
+        <Style TargetType="material:MaterialCard" x:Key="homeCard" ApplyToDerivedTypes="True">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="IsClickable" Value="True" />
         </Style>
     </Application.Resources>
 </Application>

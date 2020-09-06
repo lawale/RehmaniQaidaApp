@@ -6,12 +6,16 @@ namespace RehmaniQaidaApp.Options
 {
     public enum MenuOption
     {
+        Home,
         Lesson,
         Quiz,
         About,
+        Help,
+        Settings,
         ShareApp,
         RateApp,
         UpdateApp,
+        Color,
         Default
     }
 }
