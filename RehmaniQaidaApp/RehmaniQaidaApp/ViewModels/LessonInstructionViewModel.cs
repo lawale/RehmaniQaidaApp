@@ -4,12 +4,8 @@ using System.Text;
 
 namespace RehmaniQaidaApp.ViewModels
 {
-    public class AboutViewModel : BaseViewModel
+    public class LessonInstructionViewModel : BaseViewModel
     {
-        public AboutViewModel()
-        {
-
-        }
 
     }
 }

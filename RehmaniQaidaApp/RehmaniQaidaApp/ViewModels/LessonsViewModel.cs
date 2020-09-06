@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Akavache;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -16,16 +17,10 @@ namespace RehmaniQaidaApp.ViewModels
 
         public LessonsViewModel()
         {
-            //OpenLessonCommand = new Command(() =>
-            //{
-            //    Console.WriteLine("we");
-            //});
             Lessons = new ObservableCollection<string>();
             AddLessons();
             OpenLessonCommand = new Command<string>(async param => await ExecuteOpenLessonCommand(param));
-        }
-
-        
+        }        
 
         private void AddLessons()
         {
@@ -37,6 +32,7 @@ namespace RehmaniQaidaApp.ViewModels
 
         private async Task ExecuteOpenLessonCommand(string param)
         {
+            
             var lessonViewModel = new LessonViewModel
             {
                 Title = param

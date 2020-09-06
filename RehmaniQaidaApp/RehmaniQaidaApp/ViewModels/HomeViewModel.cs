@@ -1,31 +1,25 @@
-﻿using RehmaniQaidaApp.Options;
+﻿using RehmaniQaidaApp.Extensions;
+using RehmaniQaidaApp.Options;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Input;
-using System.Linq;
-using Xamarin.Forms;
-using XF.Material.Forms.UI;
-using RehmaniQaidaApp.Views;
 using System.Threading.Tasks;
-using RehmaniQaidaApp.Extensions;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace RehmaniQaidaApp.ViewModels
 {
-    public class MasterViewModel : BaseViewModel
+    public class HomeViewModel : BaseViewModel
     {
-        /// <summary>
-        /// Command to execute for the Tapped Event of Menu
-        /// </summary>
-        public ICommand MenuCommand { get; }
+        public ICommand NavigateCommand { get; }
 
-        public MasterViewModel()
+        public HomeViewModel()
         {
-            MenuCommand = new Command<MenuOption>(async menu => await ExecuteMenuCommand(menu));
+            NavigateCommand = new Command<string>(async param => await ExecuteNavigateCommand(param));
         }
-
-        private async Task ExecuteMenuCommand(MenuOption option)
+        private async Task ExecuteNavigateCommand(string param)
         {
+            Enum.TryParse(param, out MenuOption option);
             switch (option)
             {
                 case MenuOption.About:
@@ -39,6 +33,9 @@ namespace RehmaniQaidaApp.ViewModels
                     break;
                 case MenuOption.Quiz:
                     await NavigateTo(new QuizViewModel(), true);
+                    break;
+                case MenuOption.Color:
+                    await NavigateTo(new LessonColorChartViewModel(), true);
                     break;
                 case MenuOption.RateApp:
                     DependencyService.Get<IRateApp>().RateApp();

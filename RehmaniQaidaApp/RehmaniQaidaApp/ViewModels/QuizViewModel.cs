@@ -6,5 +6,10 @@ namespace RehmaniQaidaApp.ViewModels
 {
     public class QuizViewModel : BaseViewModel
     {
+        public QuizViewModel()
+        {
+
+        }
+
     }
 }

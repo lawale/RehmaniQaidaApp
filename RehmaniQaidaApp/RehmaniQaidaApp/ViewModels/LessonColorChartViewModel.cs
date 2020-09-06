@@ -14,6 +14,7 @@ namespace RehmaniQaidaApp.ViewModels
             AddColors();
         }
 
+
         private void AddColors()
         {
             for (var i = 1; i < 9; ++i)
