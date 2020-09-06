@@ -7,12 +7,39 @@
              xmlns:base="clr-namespace:RehmaniQaidaApp.Views.Abstractions"
              xmlns:viewModel="clr-namespace:RehmaniQaidaApp.ViewModels"
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+               xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:TypeArguments="viewModel:LessonColorChartViewModel"
              Style="{StaticResource page}"
              x:Class="RehmaniQaidaApp.Views.LessonColorChartView">
     <ContentPage.Content>
-        <FlexLayout x:Name="flex" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-            <material:MaterialIconButton Image="{Binding .}" />
-        </FlexLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <FlexLayout IsVisible="False" x:Name="flex" JustifyContent="SpaceEvenly" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <material:MaterialIconButton VerticalOptions="Center" Image="{Binding .}"  BackgroundColor="Transparent" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+
+            </FlexLayout>
+
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Colors}" VerticalOptions="Center"  HorizontalOptions="CenterAndExpand">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="10" HorizontalItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <!--<material:MaterialIconButton BackgroundColor="Transparent" HeightRequest="50" Image="{Binding .}" />-->
+                        <material:MaterialCard IsClickable="True" Padding="0" CornerRadius="12" BorderColor="Transparent">
+                            <ffimageloading:CachedImage Source="{Binding .}"  />
+                        </material:MaterialCard>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
     </ContentPage.Content>
 </base:BaseView>

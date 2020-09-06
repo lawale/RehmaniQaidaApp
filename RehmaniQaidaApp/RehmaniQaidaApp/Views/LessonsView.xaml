@@ -9,18 +9,42 @@
              xmlns:base="clr-namespace:RehmaniQaidaApp.Views.Abstractions"
              xmlns:viewModel="clr-namespace:RehmaniQaidaApp.ViewModels"
              x:TypeArguments="viewModel:LessonsViewModel"
+             BackgroundImageSource="backimage"
              Style="{StaticResource page}"
              Title="Lessons"
+             Padding="0,70"
              x:Class="RehmaniQaidaApp.Views.LessonsView">
     <ContentPage.Content>
-        <ScrollView>
-            <FlexLayout x:Name="flex" Wrap="Wrap" JustifyContent="SpaceEvenly">
+        <CollectionView ItemsSource="{Binding Lessons}" SelectionMode="None" BackgroundColor="Transparent" WidthRequest="300" HorizontalOptions="Center" VerticalScrollBarVisibility="Never" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Spacing="0" HorizontalOptions="Center">
+                        <material:MaterialButton Text="{Binding .}" HorizontalOptions="Center" BackgroundColor="Transparent" TextColor="White" Clicked="LessonClicked" CommandParameter="{Binding .}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <!--<StackLayout>
+            <ListView ItemsSource="{Binding Lessons}"  WidthRequest="300" HorizontalOptions="Center" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Spacing="0" HorizontalOptions="Center">
+                                <material:MaterialButton Text="{Binding .}" HorizontalOptions="Center" BackgroundColor="Transparent" TextColor="White" Command="{Binding OpenLessonCommand}" CommandParameter="{Binding .}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>-->
+        <!--<ScrollView>
+            <FlexLayout x:Name="flex" Wrap="Wrap" JustifyContent="SpaceEvenly" Direction="RowReverse" FlowDirection="RightToLeft">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <material:MaterialButton Text="{Binding .}" CommandParameter="{Binding .}" Clicked="LessonClicked"  CornerRadius="12" TextColor="White" BackgroundColor="#021D3A" />
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </FlexLayout>
-        </ScrollView>
+        </ScrollView>-->
     </ContentPage.Content>
 </base:BaseView>

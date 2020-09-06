@@ -18,5 +18,24 @@ namespace RehmaniQaidaApp.Views
         {
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            ViewModel.Title = (Parent as TabbedPage).Title;
+            if(ViewModel.Pages == null)
+                ViewModel.GetLessonResourcesCommand.Execute(null);
+            base.OnAppearing();
+        }
+
+        
+        private void Previous(object sender, EventArgs e) => ViewModel.Previous.Execute(null);
+
+        private void Next(object sender, EventArgs e) => ViewModel.Next.Execute(null);
+
+        private void GoToReading(object sender, EventArgs e)
+        {
+            var parent = Parent as TabbedPage;
+            parent.CurrentPage = parent.Children[1];
+        }
     }
 }

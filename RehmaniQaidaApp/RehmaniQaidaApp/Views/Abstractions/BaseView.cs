@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace RehmaniQaidaApp.Views.Abstractions
 {
@@ -20,22 +21,50 @@ namespace RehmaniQaidaApp.Views.Abstractions
 
         public BaseView()
         {
-            Title = ViewModel?.Title;
+            //Title = ViewModel?.Title;
         }
 
+        
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
             ViewModel.OnNavigationRequest = HandleNavigationRequest;
+            ViewModel.OnPopRequest = HandlePopRequest;
+            ViewModel.OnReplaceIndexRequest = HandleIndexRequest;
+            await ViewModel.OnViewAppeared();
         }
 
-        protected override void OnDisappearing()
+
+
+        private async Task HandleIndexRequest(BaseViewModel viewModel)
+        {
+            var view = ViewResolver.GetViewFor(viewModel);
+            view.BindingContext = viewModel;
+            var rootView = (Application.Current.MainPage as MasterDetailPage).Detail;
+            var lastView = (Application.Current.MainPage as MasterDetailPage).Detail.Navigation.NavigationStack.Last();
+            rootView.Navigation.InsertPageBefore(view, lastView);
+            await rootView.Navigation.PopAsync();
+        }
+
+        protected async override void OnDisappearing()
         {
             base.OnDisappearing();
-            ViewModel.OnNavigationRequest = null;
+            ViewModel.OnNavigationRequest =  null;
+            ViewModel.OnPopRequest = null;
+            ViewModel.OnReplaceIndexRequest = null;
+            await ViewModel.OnViewDisappeared();
         }
 
+        private async Task HandlePopRequest(bool toRoot)
+        {
+            if (toRoot)
+            {
+                await Navigation.PopToRootAsync();
+                return;
+            }
+            await Navigation.PopAsync();
+        }
 
         private async Task HandleNavigationRequest(BaseViewModel viewModel, bool isMasterDetailNavigation)
         {

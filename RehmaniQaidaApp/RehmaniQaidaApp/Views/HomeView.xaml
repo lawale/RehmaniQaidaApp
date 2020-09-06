@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:BaseView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:base="clr-namespace:RehmaniQaidaApp.Views.Abstractions"
+             xmlns:viewModel="clr-namespace:RehmaniQaidaApp.ViewModels"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:TypeArguments="viewModel:HomeViewModel"
+             xmlns:carouselView="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             Style="{StaticResource page}"
+             mc:Ignorable="d"
+             BackgroundImageSource="backimage"
+             Title="Home"
+             Padding="0"
+             xmlns:converter="clr-namespace:RehmaniQaidaApp.Converters"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             x:Class="RehmaniQaidaApp.Views.HomeView">
+    <ContentPage.Content>
+        <StackLayout >
+            <Grid x:Name="SplashGrid" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <StackLayout Grid.Row="0" Grid.Column="0" VerticalOptions="Start" BackgroundColor="Black">
+
+                </StackLayout>
+
+                <StackLayout  Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Margin="0,50,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <material:MaterialCard Padding="0" BackgroundColor="Transparent" IsClickable="True" ClickCommand="{Binding NavigateCommand}" ClickCommandParameter="Lesson" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
+                            <StackLayout InputTransparent="True" HorizontalOptions="Center">
+                                <material:MaterialIcon Source="ic_lesson" TintColor="White" VerticalOptions="Center" HorizontalOptions="Center" Margin="0" WidthRequest="50" HeightRequest="50" />
+                                <material:MaterialButton HorizontalOptions="Center" BackgroundColor="Transparent" Text="Lessons" TextColor="White" Margin="0" />
+                            </StackLayout>
+                        </material:MaterialCard>
+
+                        <StackLayout Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Padding="0"  Margin="50,20,50,20">
+                            <Grid HorizontalOptions="FillAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <material:MaterialCard  Padding="0" BackgroundColor="Transparent" ClickCommand="{Binding NavigateCommand}" ClickCommandParameter="About" IsClickable="True" Grid.Row="0" Grid.Column="0" HorizontalOptions="Start">
+                                    <StackLayout InputTransparent="True" HorizontalOptions="Start">
+                                        <material:MaterialIcon Source="ic_about" TintColor="White" VerticalOptions="Center" HorizontalOptions="Center" Margin="0" WidthRequest="50" HeightRequest="50" />
+                                        <material:MaterialButton HorizontalOptions="Start" BackgroundColor="Transparent" Text="About"  TextColor="White" Margin="0" />
+                                    </StackLayout>
+                                </material:MaterialCard>
+
+                                <material:MaterialCard  Padding="0" BackgroundColor="Transparent" IsClickable="True" ClickCommand="{Binding NavigateCommand}" ClickCommandParameter="Color" Grid.Row="0" Grid.Column="1" HorizontalOptions="End">
+                                    <StackLayout InputTransparent="True" HorizontalOptions="End">
+                                        <material:MaterialIcon Source="ic_color" TintColor="White" VerticalOptions="Center" HorizontalOptions="Center" Margin="0" WidthRequest="50" HeightRequest="50" />
+                                        <material:MaterialButton HorizontalOptions="Center" BackgroundColor="Transparent" Text="Color Guide" TextColor="White" Margin="0" />
+                                    </StackLayout>
+                                </material:MaterialCard>
+                            </Grid>
+                        </StackLayout>
+
+                        <StackLayout Grid.Row="2" Grid.Column="0" VerticalOptions="End" Margin="50,0,50,0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <material:MaterialCard  Padding="0" BackgroundColor="Transparent" IsClickable="True" ClickCommand="{Binding NavigateCommand}" ClickCommandParameter="Rate" Grid.Row="0" Grid.Column="0" HorizontalOptions="Start">
+                                    <StackLayout InputTransparent="True" HorizontalOptions="Start">
+                                        <material:MaterialIcon Source="ic_rate" TintColor="White" VerticalOptions="Center" HorizontalOptions="Center" Margin="0" WidthRequest="50" HeightRequest="50" />
+                                        <material:MaterialButton HorizontalOptions="Center" BackgroundColor="Transparent" Text="Rate" TextColor="White" Margin="0" />
+                                    </StackLayout>
+                                </material:MaterialCard>
+
+
+                                <material:MaterialCard Padding="0" BackgroundColor="Transparent" IsClickable="True" ClickCommand="{Binding NavigateCommand}" ClickCommandParameter="Share" Grid.Row="0" Grid.Column="1" HorizontalOptions="End">
+                                    <StackLayout InputTransparent="True" BackgroundColor="Transparent" HorizontalOptions="End" Spacing="0">
+                                        <material:MaterialIcon Source="ic_share" TintColor="White" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Center" Margin="0" WidthRequest="50" HeightRequest="50" />
+                                        <material:MaterialButton HorizontalOptions="Center" BackgroundColor="Transparent" Text="Share" TextColor="White" Margin="0" />
+                                    </StackLayout>
+                                </material:MaterialCard>
+                                
+                            </Grid>
+                        </StackLayout>
+                    </Grid>
+
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Grid.Column="0" VerticalOptions="End">
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</base:BaseView>

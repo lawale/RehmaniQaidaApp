@@ -4,12 +4,14 @@
             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
-            Style="{StaticResource page}"
+            Style="{StaticResource tabbedPage}"
             xmlns:view="clr-namespace:RehmaniQaidaApp.Views"
             BarBackgroundColor="#003366"
             xmlns:effect="clr-namespace:RehmaniQaidaApp.Effects"
             BarTextColor="White"
             UnselectedTabColor="White"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.IsSwipePagingEnabled="False"
             SelectedTabColor="White"
             xmlns:viewModel="clr-namespace:RehmaniQaidaApp.ViewModels"
             Title="{Binding Title}"
@@ -19,7 +21,7 @@
     </TabbedPage.Effects>
     <view:LessonDetailView Title="Lesson" IconImageSource="ic_book">
         <view:LessonDetailView.ViewModel>
-            <viewModel:LessonDetailViewModel />
+            <viewModel:LessonDetailViewModel  />
         </view:LessonDetailView.ViewModel>
     </view:LessonDetailView>
 
@@ -29,15 +31,21 @@
         </view:LessonReadingView.ViewModel>
     </view:LessonReadingView>
 
-    <view:LessonQuizView Title="Quiz" IconImageSource="ic_quiz">
+    <view:LessonInstructionView Title="Instructions">
+        <view:LessonInstructionView.ViewModel>
+            <viewModel:LessonInstructionViewModel />
+        </view:LessonInstructionView.ViewModel>
+    </view:LessonInstructionView>
+
+        <!--<view:LessonQuizView Title="Quiz" IconImageSource="ic_quiz">
         <view:LessonQuizView.ViewModel>
-            <viewModel:LessonQuizViewModel />
+            <viewModel:LessonQuizViewModel  />
         </view:LessonQuizView.ViewModel>
     </view:LessonQuizView>
     
     <view:LessonColorChartView Title="Color Chart" IconImageSource="ic_color">
         <view:LessonColorChartView.ViewModel>
-            <viewModel:LessonColorChartViewModel />
+            <viewModel:LessonColorChartViewModel  />
         </view:LessonColorChartView.ViewModel>
-    </view:LessonColorChartView>
+    </view:LessonColorChartView>-->
 </TabbedPage>

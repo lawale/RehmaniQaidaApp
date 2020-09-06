@@ -1,5 +1,4 @@
-﻿using RehmaniQaidaApp.ViewModels;
-using RehmaniQaidaApp.Views.Abstractions;
+﻿using Rg.Plugins.Popup.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +11,16 @@ using Xamarin.Forms.Xaml;
 namespace RehmaniQaidaApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LessonQuizView : BaseView<LessonQuizViewModel>
+    public partial class DownloadProgress : PopupPage
     {
-        public LessonQuizView()
+        public DownloadProgress()
         {
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override bool OnBackButtonPressed()
         {
-            base.OnAppearing();
-            ViewModel.Title = (Parent as TabbedPage).Title;
+            return true;
         }
     }
 }

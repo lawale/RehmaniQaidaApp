@@ -8,12 +8,104 @@
              xmlns:viewModel="clr-namespace:RehmaniQaidaApp.ViewModels"
              x:TypeArguments="viewModel:LessonReadingViewModel"
              Style="{StaticResource page}"
+             xmlns:converter="clr-namespace:RehmaniQaidaApp.Converters"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:control="clr-namespace:RehmaniQaidaApp.Controls"
+             Padding="0"
+             xmlns:carouselView="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              x:Class="RehmaniQaidaApp.Views.LessonReadingView">
+    <ContentPage.Resources>
+        <converter:IndexToPositionConverter x:Key="indexConv" />
+
+        <converter:PlayButtonIconConveter x:Key="iconConv" />
+
+        <converter:PlayButtonTextConverter x:Key="textConv" />
+
+        <Style TargetType="ContentView" x:Key="bottom">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#003366" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary" Text="Audio Type" Command="{Binding AudioTypeCommand}" />
+        <ToolbarItem Order="Secondary" Text="Audio Mode" Command="{Binding AudioModeCommand}" />
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding Title}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            
+            <carouselView:CarouselViewControl  Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" 
+                                               PositionSelected="ScrollToReading" FlowDirection="RightToLeft"
+                                               HorizontalOptions="FillAndExpand" Position="{Binding ReversedPosition}"
+                                               x:Name="page" VerticalOptions="FillAndExpand" IsSwipeEnabled="False"
+                                               CurrentPageIndicatorTintColor="#003366" ShowIndicators="False" 
+                                               ItemsSource="{Binding ReversedReadings}"  >
+                <carouselView:CarouselViewControl.ItemTemplate>
+                    <DataTemplate>
+                        <ffimageloading:CachedImage Source="{Binding .}" Aspect="AspectFit" />
+                    </DataTemplate>
+                </carouselView:CarouselViewControl.ItemTemplate>
+            </carouselView:CarouselViewControl>
+
+            <material:MaterialIconButton TintColor="#003366" Grid.Row="0" BackgroundColor="Transparent" Command="{Binding Next}" Image="ic_previous" VerticalOptions="Center" Grid.Column="0" />
+
+            <material:MaterialIconButton VerticalOptions="Center" Grid.Row="0" BackgroundColor="Transparent" TintColor="#003366" Image="ic_next" Grid.Column="2" Command="{Binding Previous}" />
+
+            <material:MaterialCard  Padding="0" BackgroundColor="#003366" IsClickable="True"  CornerRadius="12" Grid.Row="1" Clicked="PlayAudio" Grid.Column="1" HorizontalOptions="Center">
+                <StackLayout InputTransparent="True" HorizontalOptions="End"  Orientation="Horizontal" Spacing="0">
+                    <material:MaterialIcon Source="{Binding IsPlaying, Converter={StaticResource iconConv}}" TintColor="White" VerticalOptions="Center" HorizontalOptions="Center" Margin="0" WidthRequest="50" HeightRequest="50" />
+                    <material:MaterialButton HorizontalOptions="Center" BackgroundColor="Transparent" Text="{Binding IsPlaying, Converter={StaticResource textConv}, StringFormat='{0} Audio'}"  TextColor="White"  />
+                </StackLayout>
+            </material:MaterialCard>
+
+            <CollectionView x:Name="list"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" SelectionMode="Single"
+			         ItemsSource="{Binding Readings}" FlowDirection="RightToLeft" SelectedItem="{Binding SelectedItem}" 
+			        HorizontalOptions="Start" ItemsUpdatingScrollMode="KeepItemsInView" ItemSizingStrategy="MeasureAllItems" 
+			        VerticalOptions="End">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <ContentView Style="{StaticResource bottom}" 
+							Padding="4"
+							HorizontalOptions="FillAndExpand"
+							VerticalOptions="FillAndExpand">
+                            <ffimageloading:CachedImage
+								HorizontalOptions="Center"
+								VerticalOptions="Center"
+								Source="{Binding .}"
+								Aspect="AspectFill" />
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ItemSelectedCommand}" Tapped="OnItemTapped" NumberOfTapsRequired="2" CommandParameter="{Binding .}" />
+                            </ContentView.GestureRecognizers>
+                        </ContentView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
     </ContentPage.Content>
 </base:BaseView>

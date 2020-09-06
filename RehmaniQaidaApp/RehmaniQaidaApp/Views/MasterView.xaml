@@ -9,20 +9,32 @@
              xmlns:base="clr-namespace:RehmaniQaidaApp.Views.Abstractions"
              xmlns:viewModel="clr-namespace:RehmaniQaidaApp.ViewModels"
              x:TypeArguments="viewModel:MasterViewModel"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              x:Class="RehmaniQaidaApp.Views.MasterView">
     <ContentPage.Content>
         <StackLayout>
-            <Image BackgroundColor="#003366" Aspect="AspectFit" Source="logo" HeightRequest="150" />
+            <ContentView BackgroundColor="#003366" Padding="50" HeightRequest="200">
+                <ffimageloading:CachedImage BackgroundColor="#003366" HeightRequest="100" WidthRequest="100" Aspect="AspectFit" Source="splash" DownsampleToViewSize="False" >
+                    <ffimageloading:CachedImage.Transformations>
+                        <transformation:TintTransformation EnableSolidColor="True" HexColor="#FFFFFF" />
+                    </ffimageloading:CachedImage.Transformations>
+                </ffimageloading:CachedImage>
+            </ContentView>
             <TableView Intent="Menu" RowHeight="60">
                 <TableRoot>
                     <TableSection>
+                        <view:MenuCell Text="Home" Icon="ic_home" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="Home" />
                         <view:MenuCell Text="Lessons" Icon="ic_lesson" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="Lesson" />
-                        <view:MenuCell Text="Quiz" Icon="ic_quiz" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="Quiz"  />
+                        <!--<view:MenuCell Text="Quiz" Icon="ic_quiz" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="Quiz"  />-->
                         <view:MenuCell Text="About" Icon="ic_about" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="About" />
                     </TableSection>
                     <TableSection>
-                        <view:MenuCell Text="Rate App" Icon="ic_rate" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="RateApp" />
-                        <view:MenuCell Text="Share App" Icon="ic_share" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="ShareApp" />
+                        <!--<view:MenuCell Text="Rate App" Icon="ic_rate" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="RateApp" />
+                        <view:MenuCell Text="Share App" Icon="ic_share" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="ShareApp" />-->
+
+                        <view:MenuCell Text="Help" Icon="ic_rate" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="Help" />
+                        <view:MenuCell Text="Settings" Icon="ic_share" TappedCommand="{Binding MenuCommand}" TappedCommandParameter="Settings" />
                         <view:MenuCell Text="Update App" Icon="ic_update" TappedCommand="{Binding MenuCommand}" ShowBottomDivider="False" TappedCommandParameter="UpdateApp" />
                     </TableSection>
                 </TableRoot>

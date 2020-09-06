@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<rg:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rg="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             mc:Ignorable="d"
+             xmlns:materal="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+              xmlns:converter="clr-namespace:RehmaniQaidaApp.Converters"
+              Padding="20"
+              CloseWhenBackgroundIsClicked="False"
+             x:Class="RehmaniQaidaApp.Views.DownloadProgress">
+    <rg:PopupPage.Resources>
+        <converter:ProgressConverter x:Key="progressConv" />
+    </rg:PopupPage.Resources>
+    <materal:MaterialCard Padding="20" CornerRadius="16" BorderColor="#003366" BackgroundColor="#003366" VerticalOptions="CenterAndExpand">
+        <StackLayout VerticalOptions="FillAndExpand" Spacing="30"  HorizontalOptions="FillAndExpand">
+            <materal:MaterialLabel Text="{Binding Title, StringFormat='Downloading Audio Files for {0}'}" VerticalOptions="StartAndExpand" TextColor="White" TypeScale="H6" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+            <ProgressBar Progress="{Binding Progress}" ProgressColor="White" HeightRequest="30" VerticalOptions="End" />
+            <StackLayout Orientation="Horizontal" VerticalOptions="End" >
+                <materal:MaterialLabel HorizontalOptions="Start" TypeScale="H6" TextColor="White" Text="{Binding Progress, StringFormat='{0}%', Converter={StaticResource progressConv}}" />
+                <materal:MaterialLabel HorizontalOptions="EndAndExpand" TextColor="White" TypeScale="H6">
+                    <materal:MaterialLabel.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding CurrentDownloadIndex}" />
+                            <Span Text="/" />
+                            <Span Text="{Binding TotalDownloads}" />
+                        </FormattedString>
+                    </materal:MaterialLabel.FormattedText>
+                </materal:MaterialLabel>
+            </StackLayout>
+        </StackLayout>
+    </materal:MaterialCard>
+    
+</rg:PopupPage>

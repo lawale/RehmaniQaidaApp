@@ -12,17 +12,11 @@ using Xamarin.Forms.Xaml;
 namespace RehmaniQaidaApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LessonQuizView : BaseView<LessonQuizViewModel>
+    public partial class HomeView : BaseView<HomeViewModel>
     {
-        public LessonQuizView()
+        public HomeView()
         {
             InitializeComponent();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            ViewModel.Title = (Parent as TabbedPage).Title;
         }
     }
 }
