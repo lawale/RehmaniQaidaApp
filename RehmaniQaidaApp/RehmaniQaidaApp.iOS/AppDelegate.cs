@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using CarouselView.FormsPlugin.iOS;
+using FFImageLoading.Forms.Platform;
 using Foundation;
-using MediaManager;
 using UIKit;
+using UserNotifications;
+using Xamarin.Forms;
 using XF.Material.iOS;
 
 namespace RehmaniQaidaApp.iOS
@@ -24,12 +26,20 @@ namespace RehmaniQaidaApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            Forms.SetFlags("CarouselView_Experimental", "IndicatorView_Experimental");
             global::Xamarin.Forms.Forms.Init();
             Material.Init();
-            CrossMediaManager.Current.Init();
+            CachedImageRenderer.Init();
+            CarouselViewRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override void WillEnterForeground(UIApplication uiApplication)
+        {
+            base.WillEnterForeground(uiApplication);
+            Plugin.LocalNotification.NotificationCenter.ResetApplicationIconBadgeNumber(uiApplication);
         }
     }
 }
